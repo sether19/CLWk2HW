@@ -185,20 +185,25 @@ public class MatchManagerScript : MonoBehaviour {
 					}
 				}
 
-				if(y < gameManager.gridHeight - 2){
+			
+			}
+		}
+		for(int x = 0; x < gameManager.gridWidth; x++){
+		for(int y = 0; y < gameManager.gridHeight ; y++){
+			if(y < gameManager.gridHeight - 2){
 
-					int vertMatchLength = GetVerticalMatchLength(x, y);
+				int vertMatchLength = GetVerticalMatchLength(x, y);
 
-					if(vertMatchLength > 2){
+				if(vertMatchLength > 2){
 
-						for(int i = x; i < y + vertMatchLength; i++){
-							GameObject token = gameManager.gridArray[x, i]; 
-							Destroy(token);
+					for(int i = y; i < y + vertMatchLength; i++){
+					GameObject token = gameManager.gridArray[x, i]; 
+					Destroy(token);
 
-							gameManager.gridArray[x, i] = null;
-							numRemoved++;
-						}
+					gameManager.gridArray[x, i] = null;
+					numRemoved++;
 					}
+				}
 				}
 			}
 		}
