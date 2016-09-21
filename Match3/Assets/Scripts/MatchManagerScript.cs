@@ -28,11 +28,20 @@ public class MatchManagerScript : MonoBehaviour {
 
 				}
 
+				if(y < gameManager.gridHeight - 2){	//GridHasVerticalMatch checks 2 to the right
+					//gameManager.gridWidth - 2 ensures you're never extending into
+					//a space that doesn't exist
+					match = match || GridHasVerticalMatch(x, y); //if match was ever set to true, it stays true forever
+
+				}
+
 			}
 		}
 
 		return match;
 	}
+
+
 
 	/// <summary>
 	/// Check if there is a horizontal match, based on the leftmost token.
