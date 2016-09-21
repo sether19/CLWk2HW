@@ -25,7 +25,9 @@ public class MatchManagerScript : MonoBehaviour {
 													//gameManager.gridWidth - 2 ensures you're never extending into
 													//a space that doesn't exist
 					match = match || GridHasHorizontalMatch(x, y); //if match was ever set to true, it stays true forever
+
 				}
+
 			}
 		}
 
