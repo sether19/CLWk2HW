@@ -48,7 +48,7 @@ public class GameManagerScript : MonoBehaviour {
 
 		} else {
 			if(!moveTokenManager.move){
-				//if the icons are currently not moving, set them up to move and leave it be
+				//if the icons are currently not  moving, set them up to move and leave it be
 				moveTokenManager.SetupTokenMove();
 			}
 			if(!moveTokenManager.MoveTokensToFillEmptySpaces()){

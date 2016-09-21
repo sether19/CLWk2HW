@@ -164,9 +164,10 @@ public class MoveTokensScript : MonoBehaviour
         The next two lines set references to the locations we're using to move the tokens.
         startPos is set to the place where a token is coming from
         endPos is set to the empty space's location
-
+        
         The positions are converted into grid positions by gameManager.GetWorldPositionFromGridPosition.
         */
+
         Vector3 startPos = gameManager.GetWorldPositionFromGridPosition(startGridX, startGridY);
         Vector3 endPos = gameManager.GetWorldPositionFromGridPosition(endGridX, endGridY);
 
@@ -181,6 +182,7 @@ public class MoveTokensScript : MonoBehaviour
             */
             gameManager.gridArray[endGridX, endGridY] = token; 
             gameManager.gridArray[startGridX, startGridY] = null;
+		
         }
     }
 
@@ -196,7 +198,7 @@ public class MoveTokensScript : MonoBehaviour
         {
             for (int y = 1; y < gameManager.gridHeight; y++) //...and for the height of the grid...
             {
-                if (gameManager.gridArray[x, y - 1] == null) //If we find an empty space:
+				if (gameManager.gridArray[x, y - 1] == null && gameManager.gridArray[x,y] != null) //If we find an empty space:
                 {
                     for (int pos = y; pos < gameManager.gridHeight; pos++) //...using the y position as a reference...
                     {
@@ -214,8 +216,9 @@ public class MoveTokensScript : MonoBehaviour
         if (lerpPercent == 1) //If the lerp percent is 
         {
             move = false;
+
         }
 
-        return movedToken; //Tell the game if we moved the object or not.
+        return move; //Tell the game if we moved the object or not.
     }
 }
