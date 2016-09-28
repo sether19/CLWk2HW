@@ -14,9 +14,9 @@ public class ScoreScript : MonoBehaviour {
 	
 	// Update is called once per frame
 	void Update () {
-		currentscore = PlayerPrefs.GetInt("Current Score"); 
+		currentscore = MatchManagerScript.scoreMatch; 
 		scoreText.text = "Score : " + currentscore;
-		print(PlayerPrefs.GetInt("Current Score"));
+
 	
 	}
 }

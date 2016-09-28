@@ -124,6 +124,8 @@ public class MoveTokensScript : MonoBehaviour
             if (!matchManager.GridHasMatch() && userSwap) //If there's no match and the user tokens have been swapped:
             {
                 SetupTokenExchange(exchangeToken1, exchangeGridPos2, exchangeToken2, exchangeGridPos1, false); //...reverse the swap.
+				AudioSource audio = GetComponents <AudioSource> ()[6];
+				audio.Play();
             }
             else { // Otherwise:
                 exchangeToken1 = null; //Make exchangeToken1 empty.

@@ -8,12 +8,15 @@ public class InputManagerScript : MonoBehaviour {
 	protected GameManagerScript gameManager;
 	protected MoveTokensScript moveManager;
 
+	public static bool playerMatch;
+
 	//selected is a variable which tracks which token (if any) we've currently selected
 	protected GameObject selected = null;
 
 	public virtual void Start () {
 		moveManager = GetComponent<MoveTokensScript>();
 		gameManager = GetComponent<GameManagerScript>();
+		playerMatch = false;
 	}
 		
 	public virtual void SelectToken(){
@@ -22,7 +25,7 @@ public class InputManagerScript : MonoBehaviour {
 			Vector3 mousePos = Camera.main.ScreenToWorldPoint(Input.mousePosition);
 			//use a 2D raycast to see what you're clicking on
 			Collider2D collider = Physics2D.OverlapPoint(mousePos);
-
+			playerMatch = true;
 			if(collider != null){
 				//if you click on something...
 				if(selected == null){

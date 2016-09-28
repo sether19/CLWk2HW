@@ -6,15 +6,19 @@ public class MatchManagerScript : MonoBehaviour {
 	protected GameManagerScript gameManager;    //"protected" means this field is public to child scripts
 												//but not to unrelated scripts
 	public static int scoreMatch;
+//	int audioSFX = Random.Range(0, 5);
+
 	public virtual void Start () {
 		gameManager = GetComponent<GameManagerScript>();
 		scoreMatch = 0;
 	}
 
-	public void Update(){
-
-		PlayerPrefs.SetInt("Current Score", scoreMatch);
+	public int RandomSounds (){
+		int sound = Random.Range(0, 5);
+		return sound;
 	}
+
+
 
 	/// <summary>
 	/// Checks the entire grid for matches.
@@ -66,10 +70,12 @@ public class MatchManagerScript : MonoBehaviour {
 			SpriteRenderer sr1 = token1.GetComponent<SpriteRenderer>();
 			SpriteRenderer sr2 = token2.GetComponent<SpriteRenderer>();
 			SpriteRenderer sr3 = token3.GetComponent<SpriteRenderer>();
-			scoreMatch += 1;
+
 			return (sr1.sprite == sr2.sprite && sr2.sprite == sr3.sprite);  //compare their sprites
 																			//to see if they're the same
 		} else {
+			InputManagerScript.playerMatch = false;
+				
 			return false;
 		}
 	}
@@ -91,10 +97,12 @@ public class MatchManagerScript : MonoBehaviour {
 			SpriteRenderer sr1 = token1.GetComponent<SpriteRenderer>();
 			SpriteRenderer sr2 = token2.GetComponent<SpriteRenderer>();
 			SpriteRenderer sr3 = token3.GetComponent<SpriteRenderer>();
-			scoreMatch += 1;
+		
 			return (sr1.sprite == sr2.sprite && sr2.sprite == sr3.sprite);  //compare their sprites
 			//to see if they're the same
 		} else {
+			InputManagerScript.playerMatch = false;
+
 			return false;
 		}
 	}
@@ -192,7 +200,12 @@ public class MatchManagerScript : MonoBehaviour {
 					int horizonMatchLength = GetHorizontalMatchLength(x, y);
 
 					if(horizonMatchLength > 2){
-
+							scoreMatch += 1;
+						if (InputManagerScript.playerMatch == true){
+						AudioSource audio = GetComponents <AudioSource> ()[RandomSounds()];
+						audio.Play();
+						InputManagerScript.playerMatch = false;
+						}
 						for(int i = x; i < x + horizonMatchLength; i++){
 							GameObject token = gameManager.gridArray[i, y]; 
 							Destroy(token);
@@ -215,7 +228,12 @@ public class MatchManagerScript : MonoBehaviour {
 				int vertMatchLength = GetVerticalMatchLength(x, y);
 
 				if(vertMatchLength > 2){
-
+						scoreMatch += 1;
+						if (InputManagerScript.playerMatch == true){
+							AudioSource audio = GetComponents <AudioSource> ()[RandomSounds()];
+							audio.Play();
+							InputManagerScript.playerMatch = false;
+						}
 					for(int i = y; i < y + vertMatchLength; i++){
 					GameObject token = gameManager.gridArray[x, i]; 
 					Destroy(token);
