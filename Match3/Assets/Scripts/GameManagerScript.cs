@@ -1,7 +1,10 @@
 ﻿using UnityEngine;
 using System.Collections;
 
+
 public class GameManagerScript : MonoBehaviour {
+
+
 
 	public int gridWidth = 8;
 	public int gridHeight = 8;
@@ -32,6 +35,8 @@ public class GameManagerScript : MonoBehaviour {
 		inputManager = GetComponent<InputManagerScript>();
 		repopulateManager = GetComponent<RepopulateScript>();
 		moveTokenManager = GetComponent<MoveTokensScript>();
+
+	
 	}
 
 	public virtual void Update(){

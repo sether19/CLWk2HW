@@ -5,9 +5,15 @@ public class MatchManagerScript : MonoBehaviour {
 
 	protected GameManagerScript gameManager;    //"protected" means this field is public to child scripts
 												//but not to unrelated scripts
-
+	public static int scoreMatch;
 	public virtual void Start () {
 		gameManager = GetComponent<GameManagerScript>();
+		scoreMatch = 0;
+	}
+
+	public void Update(){
+
+		PlayerPrefs.SetInt("Current Score", scoreMatch);
 	}
 
 	/// <summary>
@@ -32,7 +38,7 @@ public class MatchManagerScript : MonoBehaviour {
 					//gameManager.gridWidth - 2 ensures you're never extending into
 					//a space that doesn't exist
 					match = match || GridHasVerticalMatch(x, y); //if match was ever set to true, it stays true forever
-
+				
 				}
 
 			}
@@ -60,7 +66,7 @@ public class MatchManagerScript : MonoBehaviour {
 			SpriteRenderer sr1 = token1.GetComponent<SpriteRenderer>();
 			SpriteRenderer sr2 = token2.GetComponent<SpriteRenderer>();
 			SpriteRenderer sr3 = token3.GetComponent<SpriteRenderer>();
-			
+			scoreMatch += 1;
 			return (sr1.sprite == sr2.sprite && sr2.sprite == sr3.sprite);  //compare their sprites
 																			//to see if they're the same
 		} else {
@@ -85,7 +91,7 @@ public class MatchManagerScript : MonoBehaviour {
 			SpriteRenderer sr1 = token1.GetComponent<SpriteRenderer>();
 			SpriteRenderer sr2 = token2.GetComponent<SpriteRenderer>();
 			SpriteRenderer sr3 = token3.GetComponent<SpriteRenderer>();
-
+			scoreMatch += 1;
 			return (sr1.sprite == sr2.sprite && sr2.sprite == sr3.sprite);  //compare their sprites
 			//to see if they're the same
 		} else {
@@ -140,6 +146,7 @@ public class MatchManagerScript : MonoBehaviour {
 	public int GetVerticalMatchLength(int x, int y){
 		int matchLength = 1;
 
+
 		GameObject first = gameManager.gridArray[x, y]; //get the gameobject at the provided coordinates
 
 		//make sure the script found a gameobject, and--if so--get its sprite
@@ -189,6 +196,8 @@ public class MatchManagerScript : MonoBehaviour {
 						for(int i = x; i < x + horizonMatchLength; i++){
 							GameObject token = gameManager.gridArray[i, y]; 
 							Destroy(token);
+						
+
 
 							gameManager.gridArray[i, y] = null;
 							numRemoved++;
