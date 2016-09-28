@@ -39,6 +39,8 @@ public class GameManagerScript : MonoBehaviour {
 	
 	}
 
+
+
 	public virtual void Update(){
 		//every frame, check whether the grid is full of tokens.
 
